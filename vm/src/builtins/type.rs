@@ -1129,7 +1129,7 @@ pub(crate) fn call_slot_new(
         }
     }
     if let Some(ref basetype) = staticbase {
-        if !PyType::subclasscheck(basetype.to_owned(), typ.to_owned()) {
+        if !typ.fast_issubclass(basetype) {
             return Err(vm.new_type_error(format!(
                 "{}.__new__({}) is not safe, use {}.__new__()",
                 typ.name(),
